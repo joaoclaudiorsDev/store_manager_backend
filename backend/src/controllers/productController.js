@@ -1,9 +1,9 @@
-const productService = require('../services/productService');
+const Services = require('../services/index');
 const status = require('../../utils/status'); 
 
 async function listAllProducts(req, res) {
   try {
-    const products = await productService.getAllProducts();
+    const products = await Services.getAllProducts();
     res.status(status.httpStatus('OK')).json(products);
   } catch (error) {
     res.status(status.httpStatus('INTERNAL_SERVER_ERROR'))
@@ -19,7 +19,7 @@ async function getProductById(req, res) {
   }
   
   try {
-    const product = await productService.getProductById(productId);
+    const product = await Services.getProductById(productId);
   
     if (!product) {
       return res.status(status.httpStatus('NOT_FOUND'))
