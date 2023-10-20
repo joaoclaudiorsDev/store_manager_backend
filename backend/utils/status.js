@@ -1,5 +1,3 @@
-// utils/constants.js
-
 const declaHttpStatus = {
   OK: 200,
   CREATED: 201,
