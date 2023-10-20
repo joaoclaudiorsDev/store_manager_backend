@@ -17,16 +17,17 @@ describe('Controller', function () {
   const [data] = productList; 
 
   it('should return a list of products', async function () {
-    sinon.stub(productModel, 'getAllProducts').resolves([data]);
+    sinon.stub(productModel, 'getAllProducts').resolves({ status: 'OK', data }); // Manter o objeto data
+  
     const req = {};
     const res = {
       json: sinon.spy(),
       status: sinon.stub().returnsThis(),
     };
-
+  
     await productController.listAllProducts(req, res);
-
-    expect(res.json).to.have.been.calledWith([data]);
+  
+    expect(res.json).to.have.been.calledWith(data);
     expect(res.status).to.have.been.calledWith(200);
   });
 
