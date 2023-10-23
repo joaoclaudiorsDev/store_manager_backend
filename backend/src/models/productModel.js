@@ -1,8 +1,9 @@
-const connection = require('../../utils/connection/connection');
+const camelize = require('camelize');
+const connection = require('./connection');
 
 const getAllProducts = async () => {
   const [products] = await connection.execute('SELECT * FROM StoreManager.products');
-  return products;
+  return camelize(products);
 };
 
 const getProductById = async (id) => {
@@ -10,10 +11,7 @@ const getProductById = async (id) => {
     'SELECT * FROM StoreManager.products WHERE id = ?',
     [id],
   );
-  if (product.length === 0) {
-    return null;
-  }
-  return product[0];
+  return camelize(product[0]);
 };
 
 module.exports = {
