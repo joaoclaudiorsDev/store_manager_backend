@@ -2,7 +2,9 @@ const camelize = require('camelize');
 const connection = require('./connection');
 
 const getAllProducts = async () => {
-  const [products] = await connection.execute('SELECT * FROM StoreManager.products');
+  const [products] = await connection.execute(
+    'SELECT * FROM products',
+  );
   return camelize(products);
 };
 
