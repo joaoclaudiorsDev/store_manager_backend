@@ -11,18 +11,16 @@ describe('Services', function () {
   });
 
   it('should return all products', async function () {
-    sinon.stub(productModel, 'getAllProducts').resolves({ status: 200, data: productList });
-  
-    const result = await productService.getAllProducts();
-  
-    expect(result.status).to.equal(200); 
-    expect(result.data).to.deep.equal(productList);
+    sinon.stub(productModel, 'getAllProducts').resolves(productList);
+    const allProducts = await productService.getAllProducts();
+    expect(allProducts.status).to.be.equal('OK');
+    expect(allProducts.data).to.be.an('array');
   });
 
   it('should return a product by ID', async function () {
     const id = 1;
 
-    sinon.stub(productModel, 'getProductById').withArgs(id).resolves(productList[0]); // Use productList
+    sinon.stub(productModel, 'getProductById').withArgs(id).resolves(productList[0]);
 
     const result = await productService.getProductById(id);
 

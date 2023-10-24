@@ -17,8 +17,8 @@ describe('Controller', function () {
   const [data] = productList; 
 
   it('should return a list of products', async function () {
-    sinon.stub(productModel, 'getAllProducts').resolves({ status: 'OK', data }); // Manter o objeto data
-  
+    sinon.stub(productModel, 'getAllProducts').resolves({ status: 'OK', data });
+    const mockResponse = { status: 'OK', data };
     const req = {};
     const res = {
       json: sinon.spy(),
@@ -26,8 +26,8 @@ describe('Controller', function () {
     };
   
     await productController.listAllProducts(req, res);
-  
-    expect(res.json).to.have.been.calledWith(data);
+
+    expect(res.json).to.have.been.calledWith(mockResponse);
     expect(res.status).to.have.been.calledWith(200);
   });
 
