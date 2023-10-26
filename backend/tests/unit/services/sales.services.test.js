@@ -10,7 +10,7 @@ describe('Services', function () {
     sinon.restore();
   });
 
-  it('should return all products', async function () {
+  it('should return all sales', async function () {
     sinon.stub(salesModel, 'getAllSales').resolves(saleList);
     const allSales = await salesService.getAllSales();
     expect(allSales.status).to.be.equal('OK');

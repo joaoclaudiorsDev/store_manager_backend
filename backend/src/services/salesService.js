@@ -9,11 +9,11 @@ const getAllSales = async () => {
 };
 
 const getSaleById = async (id) => {
-  const sale = await salesModel.getSalesById(id);
-  if (!sale) {
+  const data = await salesModel.getSalesById(id);
+  if (!data || data.length === 0) {
     return { status: 'NOT_FOUND', data: { message: 'Sale not found' } };
   }
-  return { status: 'OK', data: sale };
+  return { status: 'OK', data };
 };
 
 module.exports = {

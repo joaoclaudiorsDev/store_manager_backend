@@ -21,6 +21,7 @@ describe('Controller', function () {
     await salesController.listAllSales(mockReq, mockRes);
     expect(mockRes.status).to.be.calledWith(200);
   });
+  
   it('should return a specific sale by ID', async function () {
     const mockReq = { params: { id: 1 } };
     const mockRes = {
