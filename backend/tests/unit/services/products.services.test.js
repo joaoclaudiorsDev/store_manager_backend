@@ -27,4 +27,15 @@ describe('Services', function () {
     expect(result.status).to.equal('OK');
     expect(result.data).to.deep.equal(productList[0]);
   });
+  
+  it('should create a new product', async function () {
+    sinon.stub(productModel, 'postNewProduct').resolves({ insertId: 1 });
+    sinon.stub(productModel, 'getProductById').withArgs(1).resolves({ id: 1, name: 'Test Product' });
+
+    const newProduct = await productService.postNewProduct('Test Product');
+
+    expect(newProduct.status).to.equal(201);
+    expect(newProduct.data.id).to.equal(1);
+    expect(newProduct.data.name).to.equal('Test Product');
+  });
 });

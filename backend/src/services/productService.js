@@ -16,7 +16,20 @@ const getProductById = async (id) => {
   return { status: 'OK', data: product };
 };
 
+const postNewProduct = async (name) => {
+  if (!name) {
+    return { status: 400, data: { message: '"name" is required' } };
+  }
+  if (name.length < 5) {
+    return { status: 422, data: { message: '"name" length must be at least 5 characters long' } };
+  }
+  const productData = await productModel.postNewProduct(name);
+  const data = await productModel.getProductById(productData.insertId);
+  return { status: 201, data };
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
+  postNewProduct,
 };
