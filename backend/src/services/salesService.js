@@ -16,7 +16,17 @@ const getSaleById = async (id) => {
   return { status: 'OK', data };
 };
 
+const postNewSale = async (data) => {
+  const saleId = await salesModel.postNewSale();
+  data.map(async (sale) => {
+    const { productId, quantity } = sale;
+    await salesModel.registerSale(saleId, productId, quantity);
+  });
+  return { status: 201, data: { id: saleId, itemsSold: data } };
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
+  postNewSale,
 };

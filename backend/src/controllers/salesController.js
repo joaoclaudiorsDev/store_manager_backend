@@ -12,7 +12,14 @@ const getSaleById = async (req, res) => {
   return res.status(httpStatus(status)).json(data);
 };
 
+const postSale = async (req, res) => {
+  const { body } = req;
+  const { status, data } = await salesService.postNewSale(body);
+  return res.status(status).json(data);
+};
+
 module.exports = {
   listAllSales,
   getSaleById,
+  postSale,
 };

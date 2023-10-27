@@ -40,7 +40,25 @@ const getSalesById = async (id) => {
   return sale;
 };
 
+const postNewSale = async (name) => {
+  const [sale] = await connection.execute(
+    'INSERT INTO sales VALUES ()',
+    [name],
+  );
+  return sale.insertId;
+};
+
+const registerSale = async (saleId, productId, quantity) => {
+  const [sale] = await connection.execute(
+    'INSERT INTO sales_products(sale_id, product_id, quantity) VALUES (?, ?, ?)',
+    [saleId, productId, quantity],
+  );
+  return sale; 
+};
+
 module.exports = {
   getAllSales,
   getSalesById,
+  postNewSale,
+  registerSale,
 };
