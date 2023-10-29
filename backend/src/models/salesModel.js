@@ -40,10 +40,10 @@ const getSalesById = async (id) => {
   return sale;
 };
 
-const postNewSale = async (name) => {
+const postNewSale = async () => {
   const [sale] = await connection.execute(
     'INSERT INTO sales VALUES ()',
-    [name],
+
   );
   return sale.insertId;
 };
